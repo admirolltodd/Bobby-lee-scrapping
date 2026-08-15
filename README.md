@@ -58,6 +58,33 @@ After that, every push to the connected branch redeploys automatically.
 - Mobile-first, sticky bottom action bar (`.dock`) under 860px
 - Grain overlay via inline SVG turbulence on `body::before`
 
+## Interactive features (item checker + photo lightbox)
+Two small pieces of *functional* JS, in their own `<script>` block, separate
+from the motion script below on purpose — they are not decoration, so they run
+even under `prefers-reduced-motion: reduce`, which the motion script bails out
+of entirely.
+
+- **Item checker** (`.checker`, "What I pick up" section) — filter pills
+  (`.chip-filter`) toggle `[hidden]` on a grid of `.check-item`s tagged
+  `data-cat="metal|home|building|trash"`. Without JS every item stays visible
+  and the pills are just inert buttons — nothing is ever hidden by default.
+- **Photo lightbox** — each `.shots` figure wraps its `<img>` in a
+  `.shot-btn`, captioned via the figure's `data-caption`. Click opens
+  `#lightbox` full-size with Esc/backdrop-click to close and focus returned to
+  the trigger on close. The lightbox is `opacity:0;pointer-events:none` by
+  default, so it's inert and invisible without JS — no extra no-JS handling
+  needed.
+- Adding a checker item or a photo both need only one more markup block each;
+  neither JS file needs touching.
+
+(Idea credit: a Gemini-generated draft the client shared had built both of
+these against the old light theme, with no no-JS fallback. Ported the concepts
+here — dark theme, restyled, and given the no-JS/reduced-motion safety net the
+original draft didn't have. Its "Truck Active Today" pulsing status pill was
+deliberately **not** ported: it's a hardcoded, always-on live-status claim not
+backed by anything real, which conflicts with the no-fabricated-signals rule
+below.)
+
 ## Motion layer (added back deliberately)
 The site had no JavaScript for a while. It has ~2KB again, for scroll effects.
 It is written as strict progressive enhancement — **keep it that way**:

@@ -225,6 +225,32 @@ h1 .glow{
 .card.no .eyebrow::before{background:var(--rust)}
 .card.no .tick li::before{background:var(--rust);box-shadow:none}
 
+/* ============ ITEM CHECKER ============
+   Functional filter, not decoration — works without motion/JS: every
+   .check-item stays visible until script actually filters it. */
+.checker{margin-top:22px;background:var(--surface);border:1px solid var(--line-soft);
+  border-radius:16px;padding:26px 24px 28px}
+.checker h3{margin:10px 0 16px}
+.checker-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip-filter{
+  font-family:var(--ff-display);font-weight:700;font-size:.82rem;
+  padding:9px 15px;border-radius:100px;border:1px solid var(--line-soft);
+  background:rgba(0,0,0,.2);color:var(--text);cursor:pointer;
+  transition:background .2s ease,border-color .2s ease,color .2s ease;
+}
+.chip-filter:hover{border-color:var(--lime)}
+.chip-filter.active{background:var(--lime);color:#07130C;border-color:var(--lime)}
+.chip-filter:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.checker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.check-item{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 15px;border-radius:10px;background:rgba(0,0,0,.18);border:1px solid var(--line-soft);
+  font-size:.92rem;font-weight:600;color:var(--text)}
+.check-item[hidden]{display:none}
+.badge{font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 9px;border-radius:6px;flex:none}
+.badge.free{background:rgba(155,229,100,.18);color:var(--lime)}
+.badge.no{background:rgba(232,133,63,.2);color:var(--rust)}
+
 /* ============ PROOF / COUNTERS ============ */
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:34px}
 .stat{
@@ -307,12 +333,33 @@ h1 .glow{
 .shots::-webkit-scrollbar{display:none}
 .shots figure{margin:0;border-radius:12px;overflow:hidden;background:#0F241B;
   border:1px solid var(--line-soft);scroll-snap-align:center}
+.shot-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.shot-btn:focus-visible{outline:3px solid var(--lime);outline-offset:-3px}
 .shots img{width:100%;aspect-ratio:.82;object-fit:cover;object-position:center 28%;will-change:transform;
   transform:scale(1.1) translateY(var(--py,0px));transition:filter .4s ease}
 .shots figure:hover img{filter:saturate(1.15) contrast(1.05)}
 .shots-cap{margin-top:13px;font-size:.75rem;font-weight:700;letter-spacing:.14em;
   text-transform:uppercase;color:var(--mute)}
-@media(max-width:639px){.shots-cap::after{content:' · swipe →';color:var(--lime)}}
+@media(max-width:639px){.shots-cap::after{content:' · tap a photo to zoom, swipe →';color:var(--lime)}}
+@media(min-width:640px){.shots-cap::after{content:' · click a photo to zoom';color:var(--lime)}}
+
+/* ============ LIGHTBOX ============
+   Hidden via opacity:0;pointer-events:none by default — inert and
+   invisible with JS off, no separate no-JS handling needed. */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(3,8,6,.92);backdrop-filter:blur(14px);
+  display:flex;align-items:center;justify-content:center;padding:26px;
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lb-content{max-width:640px;width:100%;max-height:82vh;display:flex;flex-direction:column;align-items:center}
+.lb-content img{max-height:70vh;width:auto;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 30px 70px rgba(0,0,0,.55)}
+.lb-content figcaption{margin-top:16px;font-family:var(--ff-display);font-weight:700;
+  color:var(--head);text-align:center}
+.lb-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--head);font-size:1.6rem;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb-close:hover{border-color:var(--lime);color:var(--lime)}
+.lb-close:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
 
 /* ============ REVIEWS ============ */
 .quotes{display:grid;gap:14px;align-items:start}
@@ -468,8 +515,14 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
     </div>
 
     <div class="hero-cta r" style="--d:310ms">
-      <a class="btn btn-go" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo → 850-758-3698</a>
-      <a class="btn btn-alt" href="tel:+18507583698">Or give me a call</a>
+      <a class="btn btn-go" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Text a photo → 850-758-3698
+      </a>
+      <a class="btn btn-alt" href="tel:+18507583698">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Or give me a call
+      </a>
     </div>
 
     <div class="cue r" style="--d:380ms"><i></i> See what I haul</div>
@@ -580,6 +633,36 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
         </ul>
         <p style="margin-top:18px">Not sure which side yours lands on? Send the photo anyway — I'll give you a straight answer.</p>
       </article>
+    </div>
+
+    <div class="checker r" style="--d:150ms">
+      <span class="eyebrow">Quick item check</span>
+      <h3>Wondering if I can haul it?</h3>
+      <div class="checker-filters" role="group" aria-label="Filter items by category">
+        <button type="button" class="chip-filter active" data-filter="all" aria-pressed="true">All items</button>
+        <button type="button" class="chip-filter" data-filter="metal" aria-pressed="false">Metal &amp; motors</button>
+        <button type="button" class="chip-filter" data-filter="home" aria-pressed="false">Home &amp; furniture</button>
+        <button type="button" class="chip-filter" data-filter="building" aria-pressed="false">Building &amp; tools</button>
+        <button type="button" class="chip-filter" data-filter="trash" aria-pressed="false">Trash &amp; hazard</button>
+      </div>
+      <div class="checker-grid">
+        <div class="check-item" data-cat="metal"><span>Scrap metal &amp; pipe</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="metal"><span>Washers, dryers &amp; fridges</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="metal"><span>Water heaters &amp; batteries</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="metal"><span>Car parts &amp; rims</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="home"><span>Solid wood furniture</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="home"><span>Working or fixable appliances</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="home"><span>Light fixtures &amp; fans</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="home"><span>Doors &amp; windows</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="building"><span>Leftover lumber &amp; trim</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="building"><span>Fencing &amp; block</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="building"><span>Hand &amp; power tools</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="building"><span>Yard equipment</span><span class="badge free">Free pickup</span></div>
+        <div class="check-item" data-cat="trash"><span>Bagged household trash</span><span class="badge no">No haul</span></div>
+        <div class="check-item" data-cat="trash"><span>Wet or mold-damaged furniture</span><span class="badge no">No haul</span></div>
+        <div class="check-item" data-cat="trash"><span>Demo debris &amp; drywall</span><span class="badge no">No haul</span></div>
+        <div class="check-item" data-cat="trash"><span>Paint, chemicals &amp; tires</span><span class="badge no">No haul</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -699,9 +782,21 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
 
     <!-- Add more photos here as they come in — the grid reflows on its own -->
     <div class="shots r">
-      <figure><img src="img/work-trim.jpg" alt="Bobby Lee Duvall cutting in trim paint along a baseboard on a Crestview job" loading="lazy" width="900" height="1450"></figure>
-      <figure><img src="img/work-patch.jpg" alt="Close-up of a drywall patch being knifed smooth" loading="lazy" width="900" height="1450"></figure>
-      <figure><img src="img/work-wall.jpg" alt="Bobby Lee working a taped-off interior wall during a repaint in Okaloosa County" loading="lazy" width="900" height="1450"></figure>
+      <figure data-caption="Trim &amp; detail paint — Crestview job">
+        <button type="button" class="shot-btn" aria-label="View larger: trim and detail paint">
+          <img src="img/work-trim.jpg" alt="Bobby Lee Duvall cutting in trim paint along a baseboard on a Crestview job" loading="lazy" width="900" height="1450">
+        </button>
+      </figure>
+      <figure data-caption="Drywall repair, knifed smooth">
+        <button type="button" class="shot-btn" aria-label="View larger: drywall repair">
+          <img src="img/work-patch.jpg" alt="Close-up of a drywall patch being knifed smooth" loading="lazy" width="900" height="1450">
+        </button>
+      </figure>
+      <figure data-caption="Wall prep &amp; paint — Okaloosa County">
+        <button type="button" class="shot-btn" aria-label="View larger: wall prep and paint">
+          <img src="img/work-wall.jpg" alt="Bobby Lee working a taped-off interior wall during a repaint in Okaloosa County" loading="lazy" width="900" height="1450">
+        </button>
+      </figure>
     </div>
     <p class="shots-cap r">On the job — Okaloosa County</p>
   </div>
@@ -811,8 +906,14 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
     </div>
 
     <div class="hero-cta r" style="--d:80ms">
-      <a class="btn btn-go" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo → 850-758-3698</a>
-      <a class="btn btn-alt" href="tel:+18507583698">Or give me a call</a>
+      <a class="btn btn-go" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Text a photo → 850-758-3698
+      </a>
+      <a class="btn btn-alt" href="tel:+18507583698">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Or give me a call
+      </a>
     </div>
 
     <div class="crows r" style="--d:140ms">
@@ -837,9 +938,21 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
 
 <!-- sticky mobile action bar -->
 <nav class="dock" aria-label="Contact Bobby">
-  <a class="d-text" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo</a>
+  <a class="d-text" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    Text a photo
+  </a>
   <a class="d-call" href="tel:+18507583698">Call</a>
 </nav>
+
+<!-- lightbox: hidden by default (opacity:0;pointer-events:none), inert without JS -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo preview">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Close photo preview">&times;</button>
+  <figure class="lb-content">
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
 
 <!-- ================= STRUCTURED DATA ================= -->
 <script type="application/ld+json">
@@ -996,6 +1109,58 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', onScroll, {passive:true});
   onScroll();
+})();
+</script>
+
+<script>
+/* Item checker + lightbox — functional UI, not motion, so this runs
+   unconditionally (not gated by prefers-reduced-motion like the script
+   above). Both degrade harmlessly without JS: checker items are all
+   visible by default, and the lightbox stays invisible/inert. */
+(function(){
+  var pills = document.querySelectorAll('.chip-filter');
+  var items = document.querySelectorAll('.check-item');
+  pills.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      pills.forEach(function(p){ p.classList.remove('active'); p.setAttribute('aria-pressed','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+      var cat = btn.getAttribute('data-filter');
+      items.forEach(function(it){
+        it.hidden = !(cat === 'all' || it.getAttribute('data-cat') === cat);
+      });
+    });
+  });
+
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var lbClose = document.getElementById('lbClose');
+  var lastFocus = null;
+
+  function openLb(src, alt, cap){
+    lastFocus = document.activeElement;
+    lbImg.src = src; lbImg.alt = alt; lbCap.textContent = cap || '';
+    lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+    lbClose.focus();
+  }
+  function closeLb(){
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('.shot-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var img = btn.querySelector('img');
+      var cap = btn.closest('figure').getAttribute('data-caption') || img.alt;
+      openLb(img.src, img.alt, cap);
+    });
+  });
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
+  });
 })();
 </script>
 

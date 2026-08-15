@@ -31,10 +31,12 @@ After that, every push to the connected branch redeploys automatically.
 - Business name: Bobby Lee's Scrapping & Recovery (rebranded from an earlier "contractor consultant" concept — see hero copy)
 
 ## Known open items from the client (Robert, building this for Bobby)
-1. **Does Bobby ever pay cash for valuable items** (tool chests, running mowers, etc.) rather than just free pickup? Currently the site's ceiling is "free to you" — no purchase offer. If yes, needs a 5th card in "The Deal" section.
-2. **Verify SMS deep link behavior on Bobby's actual phone** — Android launchers vary; test that the prefilled body renders correctly.
-3. Placeholder areas to double check: none currently — phone/email/service area are all real as of last update.
-4. Three jobsite photos are real but casual (mid-task, not posed) — consider asking for 1-2 more polished/varied shots if Bobby wants a fuller gallery later.
+1. **Verify SMS deep link behavior on Bobby's actual phone** — Android launchers vary; test that the prefilled body renders correctly.
+2. Placeholder areas to double check: none currently — phone/email/service area are all real as of last update.
+3. Three jobsite photos are real but casual (mid-task, not posed) — consider asking for 1-2 more polished/varied shots if Bobby wants a fuller gallery later.
+
+## Resolved
+- **Cash for valuable items** — yes, Bobby sometimes pays cash for things like tool chests or running mowers, but this is intentionally not advertised on the site. "The Deal" section's public ceiling stays at free pickup; don't add a purchase-offer card.
 
 ## Recent direction changes (for context if continuing)
 - Started as a dark "steel data-plate" concept, metallic blue, automotive vibe — fully discarded per client request ("hate the font," "save the planet feel")

@@ -97,11 +97,18 @@ body::before{
 }
 .wrap{position:relative;z-index:1;width:100%;max-width:780px;margin:0 auto;padding:0 var(--pad)}
 
-h1,h2,h3{font-family:var(--ff-display);font-weight:800;line-height:1.04;letter-spacing:-.025em;color:var(--head)}
+h1,h2,h3{font-family:var(--ff-display);font-weight:800;line-height:1.04;letter-spacing:-.025em;color:var(--head);text-wrap:balance}
 h2{font-size:clamp(1.85rem,7.8vw,2.7rem)}
 h3{font-size:1.24rem;font-weight:700;letter-spacing:-.012em}
-p{max-width:64ch}
+p{max-width:64ch;text-wrap:pretty}
 a{color:var(--lime)}
+
+.skip-link{
+  position:absolute;top:-100px;left:12px;z-index:300;
+  background:var(--lime);color:#07130C;font-family:var(--ff-display);font-weight:700;
+  padding:12px 18px;border-radius:10px;text-decoration:none;transition:top .2s ease;
+}
+.skip-link:focus{top:12px}
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.71rem;letter-spacing:.18em;
@@ -195,7 +202,7 @@ h1 .glow{
 .metal p{color:#C6EDE1;font-size:1.03rem}
 
 /* ============ SECTIONS ============ */
-.band{padding:48px 0;position:relative}
+.band{padding:44px 0 54px;position:relative}
 .band + .band{border-top:1px solid var(--line-soft)}
 .band.tint{background:var(--pine)}
 .band.deep{background:var(--pine-2)}
@@ -231,9 +238,10 @@ h1 .glow{
   font-family:var(--ff-display);font-weight:700;font-size:.82rem;
   padding:9px 15px;border-radius:100px;border:1px solid var(--line-soft);
   background:rgba(0,0,0,.2);color:var(--text);cursor:pointer;
-  transition:background .2s ease,border-color .2s ease,color .2s ease;
+  transition:background .2s ease,border-color .2s ease,color .2s ease,transform .15s cubic-bezier(.16,1,.3,1);
 }
 .chip-filter:hover{border-color:var(--lime)}
+.chip-filter:active{transform:scale(.95)}
 .chip-filter.active{background:var(--lime);color:#07130C;border-color:var(--lime)}
 .chip-filter:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
 .checker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
@@ -328,7 +336,9 @@ h1 .glow{
 .shots::-webkit-scrollbar{display:none}
 .shots figure{margin:0;border-radius:12px;overflow:hidden;background:#0F241B;
   border:1px solid var(--line-soft);scroll-snap-align:center}
-.shot-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.shot-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in;
+  transition:transform .15s cubic-bezier(.16,1,.3,1)}
+.shot-btn:active{transform:scale(.97)}
 .shot-btn:focus-visible{outline:3px solid var(--lime);outline-offset:-3px}
 .shots img{width:100%;height:auto;aspect-ratio:.82;object-fit:cover;object-position:center 28%;will-change:transform;
   transform:scale(1.1) translateY(var(--py,0px));transition:filter .4s ease}
@@ -353,7 +363,9 @@ h1 .glow{
 .lb-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;
   background:var(--surface-2);border:1px solid var(--line);color:var(--head);font-size:1.6rem;line-height:1;
   cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb-close{transition:transform .15s cubic-bezier(.16,1,.3,1),border-color .2s ease,color .2s ease}
 .lb-close:hover{border-color:var(--lime);color:var(--lime)}
+.lb-close:active{transform:scale(.92)}
 .lb-close:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
 
 /* ============ REVIEWS ============ */
@@ -383,7 +395,9 @@ h1 .glow{
 .faq summary{
   list-style:none;cursor:pointer;padding:20px 54px 20px 22px;position:relative;
   font-family:var(--ff-display);font-weight:700;font-size:1.04rem;color:var(--head);line-height:1.35;
+  transition:background .2s ease;
 }
+.faq details:not([open]) summary:hover{background:var(--surface-2)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
   content:'';position:absolute;right:22px;top:50%;width:13px;height:13px;margin-top:-6px;
@@ -438,9 +452,13 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
 .dock a{
   display:flex;align-items:center;justify-content:center;gap:8px;min-height:53px;
   font-family:var(--ff-display);font-weight:700;font-size:1rem;border-radius:12px;text-decoration:none;
+  transition:transform .15s cubic-bezier(.16,1,.3,1),background .2s ease,border-color .2s ease;
 }
 .dock .d-text{background:var(--lime);color:#07130C;box-shadow:0 0 24px rgba(155,229,100,.26)}
+.dock .d-text:hover{background:var(--lime-hot)}
 .dock .d-call{background:var(--surface);color:var(--head);padding:0 21px;border:1px solid var(--line)}
+.dock .d-call:hover{background:var(--surface-2);border-color:var(--lime)}
+.dock a:active{transform:scale(.96)}
 .dock a:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
 
 /* ============ LARGER SCREENS ============ */
@@ -450,7 +468,7 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
   .hero{padding:48px 0 60px}
   .hero-cta{grid-auto-flow:column;justify-content:start}
   .hero-cta .btn{padding:19px 32px}
-  .band{padding:64px 0}
+  .band{padding:60px 0 72px}
   .stats{grid-template-columns:repeat(3,1fr)}
   .stat.wide{grid-column:auto}
   .shots{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;
@@ -482,6 +500,8 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
 </head>
 <body>
 
+<a class="skip-link" href="#hero">Skip to content</a>
+
 <div class="prog" aria-hidden="true"><i></i></div>
 
 <!-- icon sprite — single source for icons reused across the hero, contact and dock CTAs -->
@@ -491,7 +511,7 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
 </svg>
 
 <!-- ================= HERO ================= -->
-<header class="hero">
+<header class="hero" id="hero">
   <div class="wrap">
     <img class="r" src="img/logo.png" alt="Bobby Lee's Scrapping & Recovery — Crestview, Florida" style="width:120px;height:auto;margin-bottom:22px">
 

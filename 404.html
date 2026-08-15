@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070F0B">
+<meta name="robots" content="noindex,follow">
+<title>Page not found | Bobby Lee's Scrapping &amp; Recovery</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23070F0B'/%3E%3Cpath d='M24 5.5 32 19h-6.2v8h-3.6v-8H16L24 5.5Z' fill='%239BE564'/%3E%3Cpath d='M8.5 36.5 16.4 23l3.1 1.8-4 6.9 6.9 4-1.8 3.1-12.1-2.3Z' fill='%233FD9B0'/%3E%3Cpath d='M39.5 36.5 27.4 38.8l-1.8-3.1 6.9-4-4-6.9 3.1-1.8 7.9 13.5Z' fill='%231F8F76'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#070F0B;--pine:#0B1913;
+  --surface:rgba(155,229,100,.045);--surface-2:rgba(155,229,100,.075);
+  --line:rgba(155,229,100,.16);--line-soft:rgba(155,229,100,.09);
+  --lime:#9BE564;--lime-hot:#B8F26A;--teal:#3FD9B0;
+  --head:#F4FBF3;--text:#DCE9DF;--mute:#8CA697;
+  --ff-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --ff-body:'Karla',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:22px;text-align:center;padding:32px 20px;
+  font-family:var(--ff-body);color:var(--text);background:var(--void);
+  -webkit-font-smoothing:antialiased;position:relative;overflow:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:-20%;pointer-events:none;
+  background:radial-gradient(50% 42% at 12% 4%,rgba(63,217,176,.24) 0%,transparent 62%),
+             radial-gradient(46% 40% at 92% 96%,rgba(155,229,100,.18) 0%,transparent 62%);
+}
+img{max-width:100%;display:block;position:relative}
+.logo{width:100px;height:auto}
+.code{
+  font-family:var(--ff-display);font-weight:800;font-size:.82rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--teal);position:relative;
+}
+h1{
+  font-family:var(--ff-display);font-weight:800;letter-spacing:-.02em;line-height:1.08;
+  font-size:clamp(1.8rem,7vw,2.6rem);color:var(--head);max-width:16ch;position:relative;
+  text-wrap:balance;
+}
+p{max-width:42ch;color:var(--mute);font-size:1.03rem;line-height:1.55;position:relative;text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:6px;position:relative}
+.btn{
+  font-family:var(--ff-display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;
+  padding:16px 24px;border-radius:13px;text-decoration:none;
+  transition:transform .16s cubic-bezier(.16,1,.3,1),background .2s ease,border-color .2s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn-go{background:var(--lime);color:#07130C}
+.btn-go:hover{background:var(--lime-hot)}
+.btn-alt{background:var(--surface);color:var(--head);border:1.5px solid var(--line)}
+.btn-alt:hover{background:var(--surface-2);border-color:var(--lime)}
+.btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+</style>
+</head>
+<body>
+  <img class="logo" src="img/logo.png" alt="Bobby Lee's Scrapping & Recovery">
+  <span class="code">404</span>
+  <h1>This page didn't make it to the truck.</h1>
+  <p>Whatever you were looking for isn't here. Head back to the homepage, or just text me a photo of what you actually need hauled.</p>
+  <div class="actions">
+    <a class="btn btn-go" href="/">Back to homepage</a>
+    <a class="btn btn-alt" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo</a>
+  </div>
+</body>
+</html>

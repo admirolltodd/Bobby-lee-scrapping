@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12281F">
+<title>Bobby Lee's Scrapping &amp; Recovery — Crestview, FL</title>
+<meta name="description" content="Bobby Lee's Scrapping & Recovery. Metal taken always. Furniture, appliances, fixtures and materials picked up free and put back into use instead of the landfill. Text a photo — pickup in 24–48 hours within 60 miles of Crestview, FL.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%2312281F'/%3E%3Cpath d='M24 5.5 32 19h-6.2v8h-3.6v-8H16L24 5.5Z' fill='%236BAE4B'/%3E%3Cpath d='M8.5 36.5 16.4 23l3.1 1.8-4 6.9 6.9 4-1.8 3.1-12.1-2.3Z' fill='%233F9B87'/%3E%3Cpath d='M39.5 36.5 27.4 38.8l-1.8-3.1 6.9-4-4-6.9 3.1-1.8 7.9 13.5Z' fill='%238FC9B7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* reclaimed palette — paper, pine, verdigris, rust */
+  --paper:#F3F0E5;
+  --paper-2:#EAE6D8;
+  --pine:#12281F;
+  --pine-soft:#1D3A2E;
+  --ink:#22392F;
+  --ink-mute:#5C7065;
+  --verdigris:#3F9B87;
+  --verdigris-deep:#2A7666;
+  --leaf:#6BAE4B;
+  --rust:#B65F32;
+  --line:rgba(18,40,31,.14);
+
+  --ff-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --ff-body:'Karla',system-ui,sans-serif;
+
+  --pad:20px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--ff-body);
+  font-size:17px;line-height:1.62;
+  color:var(--ink);background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:calc(78px + var(--safe-b)); /* room for sticky bar */
+}
+img{max-width:100%;display:block}
+
+/* recycled-paper fiber */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;width:100%;max-width:760px;margin:0 auto;padding:0 var(--pad)}
+
+h1,h2,h3{font-family:var(--ff-display);font-weight:800;line-height:1.04;letter-spacing:-.02em;color:var(--pine)}
+h2{font-size:clamp(1.75rem,7.5vw,2.4rem)}
+h3{font-size:1.22rem;font-weight:700;letter-spacing:-.01em}
+p{max-width:62ch}
+.eyebrow{
+  display:inline-block;font-weight:700;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--verdigris-deep);margin-bottom:12px;
+}
+
+/* ================= HERO ================= */
+.hero{background:var(--pine);color:#DDE7DF;position:relative;overflow:hidden;padding:34px 0 40px}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 15% 0%,rgba(63,155,135,.30) 0%,transparent 60%),
+             radial-gradient(90% 70% at 95% 100%,rgba(107,174,75,.20) 0%,transparent 60%);
+}
+.hero .wrap{position:relative;z-index:2}
+
+.mark{display:flex;align-items:center;gap:11px;margin-bottom:26px}
+.mark svg{width:30px;height:30px;flex:none}
+.mark span{font-family:var(--ff-display);font-weight:700;font-size:.82rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#8FC9B7}
+
+h1{font-size:clamp(2.5rem,12.5vw,4.2rem);color:#F3F0E5;font-weight:800}
+h1 .amp{color:var(--leaf);font-weight:600}
+.place{margin-top:16px;font-weight:600;font-size:.94rem;letter-spacing:.05em;
+  text-transform:uppercase;color:#7FB79F}
+
+.hero-pitch{margin-top:22px;font-size:1.15rem;line-height:1.5;color:#E4EDE6;max-width:34ch}
+.hero-pitch b{color:#9BDB7A;font-weight:700}
+
+.hero-facts{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;
+}
+.fact{
+  font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px 13px;border-radius:100px;color:#BFE0CF;
+  border:1px solid rgba(143,201,183,.35);background:rgba(143,201,183,.09);
+}
+.fact.hot{color:#12281F;background:var(--leaf);border-color:var(--leaf)}
+
+.hero-cta{display:grid;gap:10px;margin-top:28px}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--ff-display);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;
+  padding:19px 22px;border-radius:12px;text-decoration:none;text-align:center;
+  min-height:58px;transition:transform .14s ease,background .2s ease,opacity .2s ease;
+}
+.btn:active{transform:scale(.985)}
+.btn-go{background:var(--leaf);color:#0E2417}
+.btn-go:hover{background:#7CC257}
+.btn-alt{background:transparent;color:#CFE4D6;border:1.5px solid rgba(207,228,214,.4)}
+.btn-alt:hover{background:rgba(207,228,214,.1)}
+.btn:focus-visible{outline:3px solid #9BDB7A;outline-offset:3px}
+
+/* ================= METAL BAND ================= */
+.metal{background:var(--verdigris-deep);color:#EAF6F1;padding:30px 0}
+.metal-inner{display:flex;flex-direction:column;gap:12px}
+.stamp{
+  align-self:flex-start;font-family:var(--ff-display);font-weight:800;
+  font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+  border:2px solid rgba(234,246,241,.55);border-radius:4px;padding:6px 11px;color:#EAF6F1;
+  transform:rotate(-1.5deg);
+}
+.metal h2{color:#F3F0E5;font-size:clamp(1.6rem,7vw,2.1rem)}
+.metal p{color:#C9E4DA;font-size:1.02rem}
+
+/* ================= SECTIONS ================= */
+.band{padding:52px 0}
+.band + .band{border-top:1px solid var(--line)}
+.band-head{margin-bottom:26px}
+.band-head p{margin-top:14px;color:var(--ink-mute)}
+.band.tint{background:var(--paper-2)}
+
+.stack{display:grid;gap:16px}
+.card{
+  background:#FBF9F3;border:1px solid var(--line);border-radius:14px;
+  padding:24px 22px 26px;
+}
+.card h3{margin:10px 0 10px}
+.card p{color:var(--ink-mute);font-size:1rem}
+.tick{list-style:none;display:grid;gap:11px;margin-top:16px}
+.tick li{position:relative;padding-left:26px;font-size:1rem;line-height:1.5}
+.tick li::before{
+  content:'';position:absolute;left:0;top:.42em;width:13px;height:13px;border-radius:4px;
+  background:var(--leaf);
+}
+.card.no{background:#FAF3EC;border-color:rgba(182,95,50,.3)}
+.card.no .eyebrow{color:var(--rust)}
+.card.no .tick li::before{background:var(--rust)}
+
+/* steps */
+.step{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+  padding:22px 0;border-bottom:1px solid var(--line)}
+.step:first-child{padding-top:0}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step-n{
+  font-family:var(--ff-display);font-weight:800;font-size:.9rem;color:#0E2417;
+  background:var(--leaf);width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.step h3{margin-bottom:6px}
+.step p{color:var(--ink-mute);font-size:1rem}
+
+/* deal cards */
+.deal{border-left:4px solid var(--verdigris)}
+.deal.free{border-left-color:var(--leaf)}
+.deal.free .eyebrow{color:#4A8C2E}
+
+/* trade */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.chips span{
+  font-size:.8rem;font-weight:600;color:var(--ink-mute);
+  border:1px solid var(--line);border-radius:100px;padding:7px 12px;background:#FBF9F3;
+}
+.terms{display:grid;gap:18px;margin-top:26px}
+.term{border-left:3px solid var(--verdigris);padding-left:15px}
+.term h3{font-size:1.05rem;margin-bottom:4px}
+.term p{color:var(--ink-mute);font-size:.98rem}
+.excl{
+  margin-top:26px;background:#FAF3EC;border:1px solid rgba(182,95,50,.3);
+  border-radius:12px;padding:20px 20px;font-size:.98rem;color:#7A4A2C;
+}
+.excl b{color:var(--rust);font-family:var(--ff-display);font-weight:700}
+
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:28px}
+.shots figure{margin:0;border-radius:10px;overflow:hidden;background:#DDD8C8}
+.shots img{width:100%;aspect-ratio:.62;object-fit:cover}
+.shots-cap{margin-top:11px;font-size:.78rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-mute)}
+
+/* contact */
+.contact{background:var(--pine);color:#DDE7DF;padding:52px 0 56px}
+.contact h2{color:#F3F0E5}
+.contact .eyebrow{color:#8FC9B7}
+.contact p{color:#B6CCBE;margin-top:14px}
+.crows{margin-top:26px;display:grid}
+.crow{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:16px 0;border-bottom:1px solid rgba(207,228,214,.18)}
+.crow:last-child{border-bottom:none}
+.crow .k{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#7FB79F;flex:none}
+.crow .v,.crow a{font-family:var(--ff-display);font-weight:700;font-size:1.05rem;
+  color:#F3F0E5;text-decoration:none;text-align:right;line-height:1.35}
+.crow a:hover{color:var(--leaf)}
+.crow a:focus-visible{outline:3px solid #9BDB7A;outline-offset:3px}
+
+footer{background:#0C1F17;color:#6E8C7D;padding:26px 0 calc(30px + var(--safe-b));text-align:center}
+footer p{font-size:.8rem;line-height:1.9;max-width:none}
+footer b{color:#8FC9B7;font-family:var(--ff-display);font-weight:700}
+
+/* ================= STICKY MOBILE CTA ================= */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(18,40,31,.96);backdrop-filter:blur(10px);
+  border-top:1px solid rgba(143,201,183,.25);
+  padding:11px var(--pad) calc(11px + var(--safe-b));
+  display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;
+}
+.dock a{
+  display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;
+  font-family:var(--ff-display);font-weight:700;font-size:1rem;border-radius:11px;text-decoration:none;
+}
+.dock .d-text{background:var(--leaf);color:#0E2417}
+.dock .d-call{background:rgba(207,228,214,.14);color:#CFE4D6;padding:0 20px;border:1px solid rgba(207,228,214,.3)}
+.dock a:focus-visible{outline:3px solid #9BDB7A;outline-offset:2px}
+
+/* ================= LARGER SCREENS ================= */
+@media(min-width:640px){
+  :root{--pad:32px}
+  body{font-size:18px}
+  .hero{padding:46px 0 54px}
+  .hero-cta{grid-auto-flow:column;justify-content:start}
+  .hero-cta .btn{padding:19px 30px}
+  .band{padding:66px 0}
+  .metal-inner{gap:14px}
+  .shots{gap:10px}
+}
+@media(min-width:860px){
+  .wrap{max-width:960px}
+  body{padding-bottom:0}
+  .dock{display:none}
+  .hero{padding:64px 0 72px}
+  .stack.two{grid-template-columns:1fr 1fr;gap:18px}
+  .stack.quad{grid-template-columns:1fr 1fr;gap:18px}
+  .metal-inner{flex-direction:row;align-items:center;gap:26px}
+  .metal-inner .stamp{align-self:center}
+  .metal-copy{flex:1}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="mark">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M24 5.5 32 19h-6.2v8h-3.6v-8H16L24 5.5Z" fill="#6BAE4B"/>
+        <path d="M8.5 36.5 16.4 23l3.1 1.8-4 6.9 6.9 4-1.8 3.1-12.1-2.3Z" fill="#3F9B87"/>
+        <path d="M39.5 36.5 27.4 38.8l-1.8-3.1 6.9-4-4-6.9 3.1-1.8 7.9 13.5Z" fill="#8FC9B7"/>
+      </svg>
+      <span>Est. Crestview, Florida</span>
+    </div>
+
+    <h1>Bobby Lee's<br>Scrapping<br><span class="amp">&amp;</span> Recovery</h1>
+
+    <p class="place">Okaloosa · Walton · Santa Rosa</p>
+
+    <p class="hero-pitch">If it's still good, I'll come get it — <b>free</b> — and put it back into use instead of the landfill.</p>
+
+    <div class="hero-facts">
+      <span class="fact hot">Metal taken always</span>
+      <span class="fact">Usually free</span>
+      <span class="fact">24–48 hr pickup</span>
+      <span class="fact">60-mile radius</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-go" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo → 850-758-3698</a>
+      <a class="btn btn-alt" href="tel:+18507583698">Or give me a call</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= METAL ================= -->
+<section class="metal">
+  <div class="wrap">
+    <div class="metal-inner">
+      <span class="stamp">No exceptions</span>
+      <div class="metal-copy">
+        <h2>Metal, I take. Always.</h2>
+        <p>Rusted, bent, broken, buried in the weeds — doesn't matter. Appliances, pipe, fencing, roofing tin, car parts, water heaters, batteries, a pile of nothing-in-particular. Metal never goes in a hole in the ground if I can help it. Call me on that one anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT I TAKE ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">What I pick up</span>
+      <h2>Good things get a second life</h2>
+      <p>Cleaning out a garage, a rental, a shop, an estate? Most of what people call junk isn't. A dresser, a working fridge, a stack of lumber, a toolbox — somebody out there still needs it. I take it and I make sure it gets used, rehomed or recycled.</p>
+    </div>
+
+    <div class="stack two">
+      <article class="card">
+        <span class="eyebrow">Yes — I'll come get it</span>
+        <h3>Still has life in it</h3>
+        <p>If you'd feel a little bad setting it on the curb, that's usually the right instinct.</p>
+        <ul class="tick">
+          <li><b>Any metal at all</b> — no condition requirement</li>
+          <li>Furniture in usable shape — dressers, tables, chairs, beds, cabinets</li>
+          <li>Appliances that run, or are worth fixing</li>
+          <li>Light fixtures, fans, doors, windows, hardware</li>
+          <li>Leftover building materials — lumber, block, trim, fencing</li>
+          <li>Tools and yard equipment</li>
+          <li>Whole-room or whole-house clear-outs of the above</li>
+        </ul>
+      </article>
+
+      <article class="card no">
+        <span class="eyebrow">Not what I'm after</span>
+        <h3>I'm not a dumpster</h3>
+        <p>I'd rather tell you now than show up and turn you down.</p>
+        <ul class="tick">
+          <li>Household garbage and bagged trash</li>
+          <li>Rotted, soaked or mold-damaged furniture</li>
+          <li>Demo debris, torn-out drywall, shingles, rubble</li>
+          <li>Paint, chemicals, fuel, tires, hazardous material</li>
+        </ul>
+        <p style="margin-top:18px">Not sure which side yours lands on? Send the photo anyway — I'll give you a straight answer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="band tint">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps, no runaround</h2>
+      <p>Text is best — I'm usually on a job and I'll get back to you faster that way. But I'm happy to talk to anybody who'd rather call.</p>
+    </div>
+
+    <div>
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <h3>Text me a picture</h3>
+          <p><a href="sms:+18507583698?&amp;body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20" style="color:var(--verdigris-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px">850-758-3698</a>. A photo tells me more in two seconds than a paragraph does — what it is, what shape it's in, how much there is. Add anything that helps: how many pieces, whether it's upstairs, whether there's a gate or a tight driveway.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <h3>I bring the right trailer</h3>
+          <p>That picture is how I size the load. Showing up with too small a trailer wastes your day and mine. If there's any cost at all, you'll hear the number from me before I roll out — no surprises in the driveway.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <h3>Gone in 24 to 48 hours</h3>
+          <p>Most pickups happen inside two days. I load it, I sweep up behind me, and it goes on to be repurposed, rehomed or recycled. You get your space back.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE DEAL ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">The deal</span>
+      <h2>Usually free. Always up front.</h2>
+      <p>The whole point of this is keeping good material in use and out of a landfill, so free is where I start. Here's the honest math on when it isn't.</p>
+    </div>
+
+    <div class="stack quad">
+      <article class="card deal free">
+        <span class="eyebrow">Free — the default</span>
+        <h3>Good things cost you nothing</h3>
+        <p>Usable, fixable or recyclable — I want it and you don't pay a dime. That's the deal I'd rather make every time.</p>
+      </article>
+
+      <article class="card deal">
+        <span class="eyebrow">When there's a charge</span>
+        <h3>A little over what the dump costs</h3>
+        <p>Some loads carry real junk, and the landfill charges me by weight plus fuel to get there. If that's your load, I'll quote you before I come out — a bit over what the dump run and gas actually cost me. Nothing hidden, nothing added later.</p>
+      </article>
+
+      <article class="card deal">
+        <span class="eyebrow">Good offsets bad</span>
+        <h3>Value in the load changes the math</h3>
+        <p>If there's something worth having mixed in, I'll often eat the disposal cost and haul the whole thing anyway. Tell me everything that's going — the good stuff is what makes the rest work.</p>
+      </article>
+
+      <article class="card deal">
+        <span class="eyebrow">Barter welcome</span>
+        <h3>I'll trade</h3>
+        <p>Cash isn't the only way to settle up. I'll trade for items and I'll trade for work — hauling against something you need done, or something you can do that I need. Fair on both ends, let's make a deal.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRADE WORK ================= -->
+<section class="band tint">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">While I'm out there</span>
+      <h2>Thirty years of trade work</h2>
+      <p>Hauling and scrapping is what I'm booking, but it isn't all I do. Electrical is my home trade, and I've spent a career on commercial and residential jobs doing everything around it — plus a lifetime under the hood. If you've got work, ask.</p>
+    </div>
+
+    <div class="chips">
+      <span>Electrical troubleshooting</span><span>Exterior lighting</span><span>Ceiling fans</span>
+      <span>Fixtures</span><span>Carpentry</span><span>Framing &amp; trim</span><span>Masonry</span>
+      <span>Block &amp; brick</span><span>Concrete</span><span>Drywall &amp; patch</span><span>Paint</span>
+      <span>Lawn maintenance</span><span>Basic tree trimming</span><span>Auto maintenance</span>
+      <span>Brakes &amp; suspension</span><span>Diagnostics</span><span>Tune-ups</span>
+    </div>
+
+    <div class="terms">
+      <div class="term">
+        <h3>Under your license</h3>
+        <p>Licensed contractor or GC? I work as your sub. You hold the license, I bring the hands and the experience.</p>
+      </div>
+      <div class="term">
+        <h3>Under a homeowner permit</h3>
+        <p>You can pull the permit on your own property and I'll do the work. I'll tell you exactly what to pull and what the inspector will be looking for.</p>
+      </div>
+      <div class="term">
+        <h3>It passes inspection</h3>
+        <p>Done to code. If an inspector red-tags something I put in, I come back and fix it — you don't pay twice for that.</p>
+      </div>
+      <div class="term">
+        <h3>And your vehicle</h3>
+        <p>Light automotive — maintenance, brakes, suspension, diagnostics, tune-ups. Basic to fairly advanced. I'll tell you straight whether it's something I should touch or something that belongs at a shop.</p>
+      </div>
+    </div>
+
+    <p class="excl"><b>Three things I don't take on:</b> roofing, plumbing and transmissions. The first two aren't my trade. The third I've done plenty of, and I'm done doing it. Anything else — I've either done it or I'll learn it.</p>
+
+    <div class="shots">
+      <figure><img src="img/work-trim.jpg" alt="Bobby cutting in trim paint along a baseboard over a covered floor" loading="lazy"></figure>
+      <figure><img src="img/work-patch.jpg" alt="Close-up of a drywall patch being knifed smooth" loading="lazy"></figure>
+      <figure><img src="img/work-wall.jpg" alt="Bobby working a taped-off interior wall during a repaint" loading="lazy"></figure>
+    </div>
+    <p class="shots-cap">On the job — Okaloosa County</p>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Send me a picture of it</h2>
+    <p>Text is quickest and it's what I prefer — a photo, a rough idea of how much there is, and your general location. I'll come back to you with a time.</p>
+
+    <div class="crows">
+      <div class="crow"><span class="k">Text — preferred</span><a href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">850-758-3698</a></div>
+      <div class="crow"><span class="k">Call</span><a href="tel:+18507583698">850-758-3698</a></div>
+      <div class="crow"><span class="k">Email</span><a href="mailto:Bobbylduvall@gmail.com">Bobbylduvall@gmail.com</a></div>
+      <div class="crow"><span class="k">Based in</span><span class="v">Crestview, Florida</span></div>
+      <div class="crow"><span class="k">Area</span><span class="v">60-mile radius<br>Okaloosa · Walton · Santa Rosa</span></div>
+      <div class="crow"><span class="k">Turnaround</span><span class="v">24–48 hours</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Bobby Lee's Scrapping &amp; Recovery</b><br>
+    Bobby Lee Duvall · Crestview, Florida · 850-758-3698<br>
+    Keeping good material out of the ground since day one.</p>
+  </div>
+</footer>
+
+<!-- sticky mobile action bar -->
+<nav class="dock" aria-label="Contact Bobby">
+  <a class="d-text" href="sms:+18507583698?&body=Hi%20Bobby%20-%20I%27ve%20got%20some%20things%20to%20get%20picked%20up.%20Photo%20attached.%20I%27m%20in%20">Text a photo</a>
+  <a class="d-call" href="tel:+18507583698">Call</a>
+</nav>
+
+</body>
+</html>

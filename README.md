@@ -104,6 +104,29 @@ It is written as strict progressive enhancement — **keep it that way**:
 Effects: scroll progress bar, section reveals, count-up stats, headline rule
 draw-in, drifting hero gradient, parallax on the photo strip.
 
+## Housekeeping pass (concentration/cleanup)
+A later pass tightened things up without changing what's on the page:
+- **Icon sprite** — the camera and phone glyphs (used 5x across the hero,
+  contact and dock CTAs) were duplicated inline each time. They're now defined
+  once as `<symbol>`s in a hidden sprite right after `<body>`, referenced via
+  `<use href="#i-camera">` / `<use href="#i-phone">`. Verified this still
+  renders with JS off — `<use>` is native SVG, no script required. To change
+  an icon everywhere it appears, edit the one `<symbol>`.
+- The two body `<script>` blocks (motion layer, item checker + lightbox) are
+  now one `<script>` tag holding two independent IIFEs — no behavior change,
+  the checker/lightbox IIFE is still unconditional and the motion IIFE still
+  exits early under `prefers-reduced-motion`.
+- The "Still has life in it" card's tick list was trimmed from 7 items to 4.
+  The item checker directly below it (added in a later pass) now enumerates
+  every specific item as filterable chips, so the card restates categories
+  instead of duplicating the same enumeration in prose. All the same keyword
+  terms stay on the page as real, crawlable checker-item text — nothing lost
+  for SEO, just moved to where it isn't repeated.
+- Section padding (`.band`, `.contact`, and several internal margins) pulled
+  in by roughly 15-20% — the page had ten stacked sections and the original
+  spacing was generous even by that standard. Hero padding is untouched; it's
+  the arrival moment and shouldn't feel compressed.
+
 ## Photo strip
 `.shots` is a scroll-snapped horizontal strip under 640px and a 3-up grid above
 it. **Adding more photos needs nothing but another `<figure>`** — both layouts

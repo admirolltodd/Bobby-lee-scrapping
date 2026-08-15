@@ -20,12 +20,18 @@ After that, every push to the connected branch redeploys automatically.
    places: the `<link rel="canonical">` and og/twitter URLs in `<head>`, the
    `@id`/`url` fields in the JSON-LD block, `robots.txt`, and `sitemap.xml`.
    Find-and-replace the whole string once the domain is pointed at Netlify.
-2. **Fill or delete the review slots.** The "Word of mouth" section ships with
-   three dashed placeholder cards reading *"Waiting on a real customer quote."*
-   Replace each with something a real customer actually said, or delete the
-   whole `<section>`. **Do not invent reviews** — fake testimonials are the one
+2. **Fill or delete the two remaining review slots.** The "Word of mouth"
+   section carries one real quote (Robert's, first card) and two dashed
+   placeholders reading *"Waiting on a real customer quote."* Replace those with
+   something real customers actually said, or delete them — the section reads
+   fine with one quote. **Do not invent reviews** — fake testimonials are the one
    thing that will sink a small local business's credibility, and they violate
    FTC endorsement rules.
+   - Robert's quote is attributed by first name only. Add a town or last initial
+     if he wants it; a fuller attribution reads as more credible.
+   - The featured quote carries `class="quote lead"`, which runs it full width
+     above the others at larger type. Move `lead` to whichever quote is the
+     strongest, or drop it entirely once there are three or four real ones.
 3. **Verify the SMS deep link on Bobby's phone.** Android launchers vary; check
    that the prefilled body renders.
 4. **Submit the sitemap** in Google Search Console, and claim/fill the Google

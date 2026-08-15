@@ -315,7 +315,9 @@ h1 .glow{
 @media(max-width:639px){.shots-cap::after{content:' · swipe →';color:var(--lime)}}
 
 /* ============ REVIEWS ============ */
-.quotes{display:grid;gap:14px}
+.quotes{display:grid;gap:14px;align-items:start}
+/* .lead = the featured quote, runs full width above the rest */
+.quote.lead p{font-size:1.14rem}
 .quote{
   background:var(--surface);border:1px solid var(--line-soft);border-radius:16px;padding:26px 24px;
   position:relative;
@@ -413,6 +415,8 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
     gap:12px;overflow:visible;scroll-snap-type:none}
   .shots img{aspect-ratio:.7}
   .quotes{grid-template-columns:1fr 1fr}
+  .quote.lead{grid-column:1/-1;padding:32px 30px}
+  .quote.lead p{font-size:1.24rem;line-height:1.5;max-width:58ch}
 }
 @media(min-width:860px){
   .wrap{max-width:980px}
@@ -425,7 +429,6 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
   .metal-inner .stamp{align-self:center}
   .metal-copy{flex:1}
   .stats{grid-template-columns:repeat(5,1fr)}
-  .quotes{grid-template-columns:repeat(3,1fr)}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -720,7 +723,10 @@ footer .seo{margin-top:14px;font-size:.72rem;color:#4E6357;line-height:1.8}
       Delete any slot that's still empty before launch — do not invent reviews.
     -->
     <div class="quotes">
-      <figure class="quote slot r"><p>Waiting on a real customer quote — Bobby, drop one in here.</p><span class="who">Name, Town</span></figure>
+      <figure class="quote lead r">
+        <p>I've seen him make custom chess boards and working carts out of things people threw away. I've seen him hand washer and dryer sets to folks who needed them. He gave me yard equipment he'd picked up that didn't need anything but a little more love. Bobby doesn't haul stuff off — he finds the next person for it.</p>
+        <span class="who">Robert</span>
+      </figure>
       <figure class="quote slot r" style="--d:80ms"><p>Waiting on a real customer quote — Bobby, drop one in here.</p><span class="who">Name, Town</span></figure>
       <figure class="quote slot r" style="--d:160ms"><p>Waiting on a real customer quote — Bobby, drop one in here.</p><span class="who">Name, Town</span></figure>
     </div>

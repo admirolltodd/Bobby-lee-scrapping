@@ -58,6 +58,33 @@ After that, every push to the connected branch redeploys automatically.
 - Mobile-first, sticky bottom action bar (`.dock`) under 860px
 - Grain overlay via inline SVG turbulence on `body::before`
 
+## Interactive features (item checker + photo lightbox)
+Two small pieces of *functional* JS, in their own `<script>` block, separate
+from the motion script below on purpose — they are not decoration, so they run
+even under `prefers-reduced-motion: reduce`, which the motion script bails out
+of entirely.
+
+- **Item checker** (`.checker`, "What I pick up" section) — filter pills
+  (`.chip-filter`) toggle `[hidden]` on a grid of `.check-item`s tagged
+  `data-cat="metal|home|building|trash"`. Without JS every item stays visible
+  and the pills are just inert buttons — nothing is ever hidden by default.
+- **Photo lightbox** — each `.shots` figure wraps its `<img>` in a
+  `.shot-btn`, captioned via the figure's `data-caption`. Click opens
+  `#lightbox` full-size with Esc/backdrop-click to close and focus returned to
+  the trigger on close. The lightbox is `opacity:0;pointer-events:none` by
+  default, so it's inert and invisible without JS — no extra no-JS handling
+  needed.
+- Adding a checker item or a photo both need only one more markup block each;
+  neither JS file needs touching.
+
+(Idea credit: a Gemini-generated draft the client shared had built both of
+these against the old light theme, with no no-JS fallback. Ported the concepts
+here — dark theme, restyled, and given the no-JS/reduced-motion safety net the
+original draft didn't have. Its "Truck Active Today" pulsing status pill was
+deliberately **not** ported: it's a hardcoded, always-on live-status claim not
+backed by anything real, which conflicts with the no-fabricated-signals rule
+below.)
+
 ## Motion layer (added back deliberately)
 The site had no JavaScript for a while. It has ~2KB again, for scroll effects.
 It is written as strict progressive enhancement — **keep it that way**:
@@ -76,6 +103,29 @@ It is written as strict progressive enhancement — **keep it that way**:
 
 Effects: scroll progress bar, section reveals, count-up stats, headline rule
 draw-in, drifting hero gradient, parallax on the photo strip.
+
+## Housekeeping pass (concentration/cleanup)
+A later pass tightened things up without changing what's on the page:
+- **Icon sprite** — the camera and phone glyphs (used 5x across the hero,
+  contact and dock CTAs) were duplicated inline each time. They're now defined
+  once as `<symbol>`s in a hidden sprite right after `<body>`, referenced via
+  `<use href="#i-camera">` / `<use href="#i-phone">`. Verified this still
+  renders with JS off — `<use>` is native SVG, no script required. To change
+  an icon everywhere it appears, edit the one `<symbol>`.
+- The two body `<script>` blocks (motion layer, item checker + lightbox) are
+  now one `<script>` tag holding two independent IIFEs — no behavior change,
+  the checker/lightbox IIFE is still unconditional and the motion IIFE still
+  exits early under `prefers-reduced-motion`.
+- The "Still has life in it" card's tick list was trimmed from 7 items to 4.
+  The item checker directly below it (added in a later pass) now enumerates
+  every specific item as filterable chips, so the card restates categories
+  instead of duplicating the same enumeration in prose. All the same keyword
+  terms stay on the page as real, crawlable checker-item text — nothing lost
+  for SEO, just moved to where it isn't repeated.
+- Section padding (`.band`, `.contact`, and several internal margins) pulled
+  in by roughly 15-20% — the page had ten stacked sections and the original
+  spacing was generous even by that standard. Hero padding is untouched; it's
+  the arrival moment and shouldn't feel compressed.
 
 ## Photo strip
 `.shots` is a scroll-snapped horizontal strip under 640px and a 3-up grid above
